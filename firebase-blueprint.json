@@ -1,0 +1,134 @@
+{
+  "entities": {
+    "Channel": {
+      "title": "Channel",
+      "description": "A chat channel in the Discord clone",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the channel"
+        },
+        "createdAt": {
+          "type": "number",
+          "description": "Timestamp of creation"
+        }
+      },
+      "required": ["name", "createdAt"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "A message sent in a channel",
+      "type": "object",
+      "properties": {
+        "channelId": {
+          "type": "string",
+          "description": "The ID of the channel this message belongs to"
+        },
+        "author": {
+          "type": "string",
+          "description": "The username of the author"
+        },
+        "content": {
+          "type": "string",
+          "description": "The text content of the message"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "Optional URL for an attached image"
+        },
+        "timestamp": {
+          "type": "number",
+          "description": "Timestamp of the message"
+        },
+        "reactions": {
+          "type": "object",
+          "description": "A map of reaction emojis to counts"
+        },
+        "imageLayout": {
+          "type": "string",
+          "description": "The layout of the image (normal, full, center)"
+        },
+        "color": {
+          "type": "string",
+          "description": "The color of the message text"
+        },
+        "authorColor": {
+          "type": "string",
+          "description": "The color of the author's name"
+        },
+        "authorFont": {
+          "type": "string",
+          "description": "The font family of the author's name"
+        },
+        "authorBold": {
+          "type": "boolean",
+          "description": "Whether the author's name is bold"
+        },
+        "authorItalic": {
+          "type": "boolean",
+          "description": "Whether the author's name is italic"
+        }
+      },
+      "required": ["channelId", "author", "timestamp", "reactions"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Server-wide settings",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the server"
+        }
+      },
+      "required": ["name"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Custom profile settings for a user",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The ID of the user"
+        },
+        "nameColor": {
+          "type": "string",
+          "description": "The preferred color for the user's name"
+        },
+        "fontFamily": {
+          "type": "string",
+          "description": "The preferred font family for the user's name"
+        },
+        "isBold": {
+          "type": "boolean",
+          "description": "Whether the name should be bold"
+        },
+        "isItalic": {
+          "type": "boolean",
+          "description": "Whether the name should be italic"
+        }
+      },
+      "required": ["userId"]
+    }
+  },
+  "firestore": {
+    "/channels/{channelId}": {
+      "schema": "Channel",
+      "description": "Collection of chat channels"
+    },
+    "/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Collection of all messages across all channels"
+    },
+    "/settings/{settingId}": {
+      "schema": "Settings",
+      "description": "Collection for server-wide settings"
+    },
+    "/userProfiles/{profileId}": {
+      "schema": "UserProfile",
+      "description": "Collection of user profile customizations"
+    }
+  }
+}
